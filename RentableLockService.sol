@@ -55,12 +55,10 @@ contract RentableLockService {
         if (remainTime > 0 && renter == msg.sender) {
             NormalReturned(renter, remain, now);
             unlock();
-        } else if (renter == msg.sender){
+        } else {
             Timeout(renter, now);
             NormalReturned(renter, 0, now);
             unlock();
-        } else {
-            throw;
         }
     }
     
@@ -71,10 +69,9 @@ contract RentableLockService {
         if (locked == false && renter == msg.sender) {
             locked = true;
             Locked(renter, now);
-        } else if (renter == msg.sender){
-            Timeout(renter, now);
         } else {
-            throw;
+            return_();
+            Timeout(renter, now);
         }
     }
     
@@ -85,10 +82,9 @@ contract RentableLockService {
         if (locked == true && renter == msg.sender) {
             locked = false;
             Unlocked(renter, now);
-        } else if (renter == msg.sender) {
-            Timeout(renter, now);
         } else {
-            throw;
+            return_();
+            Timeout(renter, now);
         }
     }
 }
