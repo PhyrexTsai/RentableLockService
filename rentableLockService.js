@@ -1,4 +1,3 @@
-// Homework JS
 // 當頁面載入完成時
 $(function() {
 	// 連結 enode
