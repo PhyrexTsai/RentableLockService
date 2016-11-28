@@ -50,9 +50,9 @@ contract RentableLockService {
     // 假如未在時間內歸還，則任何操作發生時 (return_, lock, unlock) 則將會自動歸還並發射 Timeout 事件
     function return_() {
         // 計算餘額退還
-        var remainTime = (endTime - now);
+        var remainTime = (endTime - now) / 1000;
         var remain = remainTime * 10 finney;
-        if (remainTime > 0 && renter == msg.sender) {
+        if (endTime > now && renter == msg.sender) {
             NormalReturned(renter, remain, now);
             unlock();
         } else {
