@@ -57,7 +57,6 @@ contract RentableLockService {
             unlock();
         } else {
             Timeout(renter, now);
-            NormalReturned(renter, 0, now);
             unlock();
         }
     }
