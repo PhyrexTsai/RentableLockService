@@ -40,7 +40,6 @@ contract RentableLockService {
             endTime = now + (msg.value / 100);
             renter = msg.sender;
             Rented(renter, msg.value, now);
-            Locked(renter, now);
             lock();
         }
     }
@@ -53,12 +52,13 @@ contract RentableLockService {
         // 計算餘額退還
         var remainTime = (endTime - now);
         var remain = remainTime * 10 finney;
-        locked = false;
         if (remainTime > 0 && renter == msg.sender) {
             NormalReturned(renter, remain, now);
+            unlock();
         } else if (renter == msg.sender){
             Timeout(renter, now);
             NormalReturned(renter, 0, now);
+            unlock();
         } else {
             throw;
         }
