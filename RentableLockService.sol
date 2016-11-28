@@ -37,7 +37,7 @@ contract RentableLockService {
             InUse(msg.sender, renter, now);
         } else if (renter == 0){
             locked = false;
-            endTime = now + (msg.value / 100);
+            endTime = now + (msg.value / 10000000000000000);
             renter = msg.sender;
             Rented(renter, msg.value, now);
             lock();
