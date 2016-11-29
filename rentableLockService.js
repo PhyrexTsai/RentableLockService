@@ -209,6 +209,7 @@ function contractControl(rentablelockservice, eth) {
 		$('#renttimedata').text(time * 100);
 		$('#renterbalancedata').text(eth.getBalance(eth.coinbase));
 		$('#rentablelockbalancedata').text($('#deposit').val());
+		$('#lockeddata').text('上鎖');
 		var txRentHash = rentableLockService.rent({
 			from: eth.coinbase,
 			value: time * 1000000000000000000
@@ -216,20 +217,26 @@ function contractControl(rentablelockservice, eth) {
 	})
 	$('#return').on('click', function() {
 		// 當有人按歸還按鈕要如何 handle
+		$('#renttimedata').text("");
+		$('#renterbalancedata').text("");
+		$('#rentablelockbalancedata').text("");
 		var txReturnHash = rentableLockService.return_({
 			from: eth.coinbase
 		});
+		$('#lockeddata').text('上鎖');
 	})
 	$('#lock').on('click', function() {
 		// 當有人按上鎖按鈕要如何 handle
 		var txLockHash = rentableLockService.lock({
 			from: eth.coinbase
 		});
+		$('#lockeddata').text('上鎖');
 	})
 	$('#unlock').on('click', function() {
 		// 當有人按解鎖按鈕要如何 handle
 		var txLockHash = rentableLockService.unlock({
 			from: eth.coinbase
 		});
+		$('#lockeddata').text('解鎖');
 	})
 }
