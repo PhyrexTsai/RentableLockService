@@ -211,7 +211,7 @@ function contractControl(rentablelockservice, eth) {
 		$('#rentablelockbalancedata').text($('#deposit').val());
 		var txRentHash = rentableLockService.rent({
 			from: eth.coinbase,
-			gas: time
+			value: time * 1000000000000000000
 		});
 	})
 	$('#return').on('click', function() {
