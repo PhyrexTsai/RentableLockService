@@ -206,13 +206,12 @@ function contractControl(rentablelockservice, eth) {
 	$('#rent').on('click', function() {
 		// 當有人按租用按鈕要如何 handle
 		var time = $('#deposit').val();
-		var ether = time * 1000000000000000000;
 		$('#renttimedata').text(time * 100);
 		$('#renterbalancedata').text(eth.getBalance(eth.coinbase));
 		$('#rentablelockbalancedata').text($('#deposit').val());
 		var txRentHash = rentableLockService.rent({
 			from: eth.coinbase,
-			gas: ether
+			gas: time
 		});
 	})
 	$('#return').on('click', function() {
